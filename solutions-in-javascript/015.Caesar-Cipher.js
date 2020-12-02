@@ -4,11 +4,9 @@ const caesarCipherEncryptor = (string, key) => {
 
   for (let str of string) {
     let index = alphabets.indexOf(str) + key;
-
     while (index > 25) {
       index = index - 25 - 1;
     }
-
     newString += alphabets[index];
   }
 
