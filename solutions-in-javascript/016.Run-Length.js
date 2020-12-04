@@ -5,9 +5,10 @@ const runLengthEncoding = (string) => {
     if (string[i - 1] !== string[i] || repeat === 9) {
       charArray.push(repeat);
       charArray.push(string[i - 1]);
-      repeat = 0;
+      repeat = 1;
+    } else {
+      repeat++;
     }
-    repeat++;
   }
   charArray.push(repeat);
   charArray.push(string[string.length - 1]);
