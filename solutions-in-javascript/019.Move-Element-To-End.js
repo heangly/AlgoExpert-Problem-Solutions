@@ -9,7 +9,6 @@ const moveElementToEnd = (array, toMove) => {
     }
     left++;
   }
-
   return array;
 };
 
