@@ -1,8 +1,13 @@
 const arrayOfProducts = (array) => {
   const output = [];
+  for (let i = 0; i < array.length; i++) {
+    let sum = 1;
+    for (let j = 0; j < array.length; j++) {
+      if (i !== j) sum *= array[j];
+    }
+    output.push(sum);
+  }
 
-  const total = array.reduce((acc, curr) => acc * curr);
-  array.forEach((num) => output.push(total / num));
   return output;
 };
 
