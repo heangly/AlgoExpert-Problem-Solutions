@@ -1,10 +1,9 @@
 function hasSingleCycle(array) {
   // Write your code here.
-  let visitedElement = 0;
+  let i = 0;
   let currIndex = 0;
-  while (visitedElement < array.length) {
-    if (visitedElement > 0 && currIndex === 0) return false;
-    visitedElement++;
+  while (i < array.length) {
+    if (i > 0 && currIndex === 0) return false;
 
     let jump = array[currIndex];
     let nextIdx = (currIndex + jump) % array.length;
@@ -13,7 +12,9 @@ function hasSingleCycle(array) {
     } else {
       currIndex = nextIdx + array.length;
     }
+    i++;
   }
+
   return currIndex === 0;
 }
 
