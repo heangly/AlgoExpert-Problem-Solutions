@@ -7,30 +7,27 @@ class BST {
 }
 
 function maxPathSum(tree) {
-  // Write your code here.
-  const ans = [tree.value, tree.left.value, tree.right.value];
-  let rootLeft = tree.left;
-  let rootRight = tree.right;
-
-  while (rootLeft.right) {
-    ans.push(rootLeft.right.value);
-    rootLeft = rootLeft.right;
-  }
-
-  while (rootRight.right) {
-    ans.push(rootRight.right.value);
-    rootRight = rootRight.right;
-  }
-  return ans.reduce((acc, curr) => acc + curr, 0);
+  const [_, maxSum] = findMaxSum(tree);
+  return maxSum;
 }
 
-// const inorderWalk = (root) => {
-//   if (root) {
-//     inorderWalk(root.left);
-//     console.log(root.value);
-//     inorderWalk(root.right);
-//   }
-// };
+function findMaxSum(tree) {
+  if (tree === null) return [0, -Infinity];
+
+  const [leftMaxSum, leftMaxPath] = findMaxSum(tree.left);
+  const [rightMaxSum, rightMaxPath] = findMaxSum(tree.right);
+  const maxChildSum = Math.max(leftMaxSum, rightMaxSum);
+
+  const { value } = tree;
+  const maxSumAsBranch = Math.max(maxChildSum + value, value);
+  const maxSumAsRootNode = Math.max(
+    leftMaxSum + value + rightMaxSum,
+    maxSumAsBranch
+  );
+  const maxPathSum = Math.max(leftMaxPath, rightMaxPath, maxSumAsRootNode);
+
+  return [maxSumAsBranch, maxPathSum];
+}
 
 const bst = new BST(1);
 bst.left = new BST(2);
