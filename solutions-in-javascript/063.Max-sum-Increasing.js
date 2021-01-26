@@ -1,26 +1,28 @@
 function maxSumIncreasingSubsequence(array) {
-  // Write your code here.
-  if (array.length === 1) return array;
-  const max = -Infinity;
-  const ans = [];
-  const permutations = [];
-
+  const sequences = new Array(array.length);
+  const sums = [...array];
+  let maxSumIdx = 0;
   for (let i = 0; i < array.length; i++) {
-    const temp = [];
-    for (let j = i + 1; j < array.length; j++) {
-      if (array[j] > array[j - 1]) {
-        temp.push(array[j]);
+    const currentNum = array[i];
+    for (let j = 0; j < i; j++) {
+      const otherNum = array[j];
+      if (otherNum < currentNum && sums[j] + currentNum >= sums[i]) {
+        sums[i] = sums[j] + currentNum;
+        sequences[i] = j;
       }
     }
-    console.log(temp);
+    if (sums[i] >= sums[maxSumIdx]) maxSumIdx = i;
   }
+  return [sums[maxSumIdx], buildSequence(array, sequences, maxSumIdx)];
+}
 
-  // for (const permute of permutations) {
-  //   const temp = permute.reduce((acc, curr) => acc + curr, 0);
-  //   console.log(temp);
-  // }
-
-  return permutations;
+function buildSequence(array, sequences, currentIdx) {
+  const sequence = [];
+  while (currentIdx !== undefined) {
+    sequence.unshift(array[currentIdx]);
+    currentIdx = sequences[currentIdx];
+  }
+  return sequence;
 }
 
 console.log(maxSumIncreasingSubsequence([10, 70, 20, 30, 50, 11, 30]));
