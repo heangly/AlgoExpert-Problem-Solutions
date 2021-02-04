@@ -1,30 +1,14 @@
 function minNumberOfJumps(array) {
-  // Write your code here.
-  let start = 0;
-  let end = array.length - 1;
-  let jump = 0;
+  const jumps = [0, ...new Array(array.length - 1).fill(Infinity)];
 
-  while (start < end) {
-    let steps = array[start];
-    let maxSteps = steps + start;
-
-    if (maxSteps >= array.length - 1) {
-      return jump;
+  for (let i = 1; i < array.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (array[j] >= i - j) {
+        jumps[i] = Math.min(jumps[j] + 1, jumps[i]);
+      }
     }
-
-    let max = helper(start, maxSteps, array);
-    // let max = Math.max(range);
-    // let nextSteps = range.indexOf(max);
-    // console.log(nextSteps);
-    // console.log(range);
-    break;
   }
-}
-
-function helper(start, maxSteps, array) {
-  let range = array.slice(start, maxSteps + 1);
-  let max = Math.max(...range);
-  console.log(max);
+  return jumps[jumps.length - 1];
 }
 
 console.log(minNumberOfJumps([3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]));
