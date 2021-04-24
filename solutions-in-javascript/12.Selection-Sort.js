@@ -1,3 +1,4 @@
+// O(n^2) time | O(1) space
 function selectionSort(array) {
   // Write your code here.
   let startIdx = 0
