@@ -12,4 +12,4 @@ const isPalindrome = (string) => {
   return true
 }
 
-console.log(isPalindrome('abcdcba'))
+console.log(isPalindrome('abcdefghihgfeddcba'))
