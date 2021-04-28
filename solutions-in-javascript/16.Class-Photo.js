@@ -1,4 +1,4 @@
-// Time: O(n) | Space: O(1)
+// Time: nlog(n) | Space: O(1)
 const classPhotos = (redShirtHeights, blueShirtHeights) => {
   redShirtHeights.sort((a, b) => b - a)
   blueShirtHeights.sort((a, b) => b - a)
