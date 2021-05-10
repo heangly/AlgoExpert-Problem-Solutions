@@ -1,3 +1,4 @@
+// Time O(n) | Space O(1)
 const moveElementToEnd = (array, toMove) => {
   // Write your code here.
   let j = array.length - 1
