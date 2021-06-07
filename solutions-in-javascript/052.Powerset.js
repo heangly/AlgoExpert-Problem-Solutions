@@ -1,11 +1,11 @@
+// Time: O(2^n * n)
 const powerset = (array) => {
   const ans = [[]]
   for (const element of array) {
-    const current = []
-    for (const num of ans) {
-      current.push(num.concat(element))
+    const length = ans.length
+    for (let i = 0; i < length; i++) {
+      ans.push(ans[i].concat(element))
     }
-    ans.push(...current)
   }
   return ans
 }
