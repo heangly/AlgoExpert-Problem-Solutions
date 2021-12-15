@@ -1,38 +1,45 @@
-function heapSort(array) {
+const heapSort = (array) => {
   buildMaxHeap(array)
-  for (let i = array.length - 1; i > 0; i--) {
-    ;[array[0], array[i]] = [array[i], array[0]]
-    siftDown(0, i - 1, array)
+
+  for (let endIdx = array.length - 1; endIdx > 0; endIdx--) {
+    swap(0, endIdx, array)
+    siftDown(0, endIdx - 1, array)
   }
+
   return array
 }
 
 const buildMaxHeap = (arr) => {
-  let firstParent = Math.floor(arr.length - 1 / 2)
-  for (let i = firstParent; i >= 0; i--) {
-    siftDown(i, arr.length - 1, arr)
+  let firstParentIdx = Math.floor((arr.length - 1) / 2)
+  for (let currentIdx = firstParentIdx; currentIdx >= 0; currentIdx--) {
+    siftDown(currentIdx, arr.length - 1, arr)
   }
 }
 
-const siftDown = (current, end, arr) => {
-  let childOne = current * 2 + 1
-  while (childOne <= end) {
-    const childTwoIdx = current * 2 + 2 <= end ? current * 2 + 2 : -1
-    let idxToSwap
-    if (childTwoIdx !== -1 && arr[childTwoIdx] > arr[childOne]) {
-      idxToSwap = childTwoIdx
+const siftDown = (currentIdx, endIdx, arr) => {
+  let firstChildIdx = 2 * currentIdx + 1
+
+  while (firstChildIdx <= endIdx) {
+    let secondChildIdx = 2 * currentIdx + 2 <= endIdx ? 2 * currentIdx + 2 : -1
+    let indexToSwap = null
+    if (secondChildIdx !== -1 && arr[secondChildIdx] > arr[firstChildIdx]) {
+      indexToSwap = secondChildIdx
     } else {
-      idxToSwap = childOne
+      indexToSwap = firstChildIdx
     }
 
-    if (arr[idxToSwap] > arr[current]) {
-      ;[arr[current], arr[idxToSwap]] = [arr[idxToSwap], arr[current]]
-      current = idxToSwap
-      childOne = current * 2 + 1
+    if (arr[indexToSwap] > arr[currentIdx]) {
+      swap(currentIdx, indexToSwap, arr)
+      currentIdx = indexToSwap
+      firstChildIdx = currentIdx * 2 + 1
     } else {
       return
     }
   }
+}
+
+const swap = (i, j, arr) => {
+  ;[arr[i], arr[j]] = [arr[j], arr[i]]
 }
 
 console.log(heapSort([8, 5, 2, 9, 5, 6, 3]))
