@@ -12,7 +12,7 @@ function findSuccessor(tree, node) {
   let successor = null
 
   const dfs = (myTree) => {
-    if (!myTree || successor !== null) return
+    if (!myTree || successor) return
 
     dfs(myTree.left)
 
