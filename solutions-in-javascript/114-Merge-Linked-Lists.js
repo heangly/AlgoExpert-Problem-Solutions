@@ -34,7 +34,7 @@ const mergeLinkedLists = (headOne, headTwo) => {
     }
   }
 
-  if (p1) p1Prev.next = p2
+  if (!p1) p1Prev.next = p2
   return headOne.value < headTwo.value ? headOne : headTwo
 }
 
