@@ -32,3 +32,5 @@ const shiftedBinarySearch = (array: number[], target: number): number => {
 const array = [45, 61, 71, 72, 73, 0, 1, 21, 33, 37]
 const target = 37
 console.log(shiftedBinarySearch(array, target))
+
+export {}

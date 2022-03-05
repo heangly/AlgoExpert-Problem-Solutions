@@ -45,3 +45,5 @@ const helper = (
 const arr = [0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 45, 45, 45]
 const num = 45
 console.log(searchForRange(arr, num))
+
+export {}
