@@ -1,34 +1,30 @@
 const quickSelect = (array: number[], k: number): number => {
-  let startIdx = 0
-  let endIdx = array.length - 1
+  let start = 0
+  let end = array.length - 1
+  const position = k - 1
 
   while (true) {
-    const pivotIdx = startIdx
-    let leftIdx = startIdx + 1
-    let rightIdx = endIdx
+    let pivot = start
+    let left = start + 1
+    let right = end
 
-    while (leftIdx <= rightIdx) {
-      if (
-        array[leftIdx] > array[pivotIdx] &&
-        array[rightIdx] < array[pivotIdx]
-      ) {
-        swap(leftIdx, rightIdx, array)
+    while (left <= right) {
+      if (array[left] > array[pivot] && array[right] < array[pivot]) {
+        swap(left, right, array)
       }
 
-      if (array[leftIdx] <= array[pivotIdx]) leftIdx++
-      if (array[rightIdx] >= array[pivotIdx]) rightIdx--
+      if (array[left] <= array[pivot]) left++
+      if (array[right] >= array[pivot]) right--
     }
 
-    swap(rightIdx, pivotIdx, array)
+    swap(right, pivot, array)
 
-    if (rightIdx === k - 1) {
-      return array[rightIdx]
-    }
+    if (position === right) return array[right]
 
-    if (rightIdx < k - 1) {
-      startIdx = rightIdx + 1
+    if (position > right) {
+      start = right + 1
     } else {
-      endIdx = rightIdx - 1
+      end = right - 1
     }
   }
 }
