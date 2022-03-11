@@ -36,3 +36,4 @@ const countingSort = (array: number[], digit: number) => {
 }
 
 console.log(radixSort([8762, 654, 3008, 345, 87, 65, 234, 12, 2]))
+export {}
