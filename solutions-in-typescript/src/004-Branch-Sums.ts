@@ -41,3 +41,4 @@ bst.left.left.right = new BinaryTree(9)
 bst.left.right.left = new BinaryTree(10)
 
 console.log(branchSums(bst))
+export {}
