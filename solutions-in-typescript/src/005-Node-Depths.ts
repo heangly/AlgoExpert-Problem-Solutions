@@ -19,3 +19,5 @@ const dfs = (tree: BinaryTree | null, depth: number): number => {
   if (!tree) return 0
   return depth + dfs(tree.left, depth + 1) + dfs(tree.right, depth + 1)
 }
+
+export {}
