@@ -12,6 +12,7 @@ class Node1 {
     return this
   }
 
+  // Time: O(v + e) | Space: O(v) where v is the number of vertices and e is the number of edges
   depthFirstSearch(array: string[]) {
     array.push(this.name)
     for (const child of this.children) {
@@ -20,3 +21,5 @@ class Node1 {
     return array
   }
 }
+
+export {}
