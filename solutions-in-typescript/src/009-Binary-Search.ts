@@ -1,3 +1,4 @@
+// Time: O(log(n)) | Space: O(1)
 const binarySearch = (array: number[], target: number): number => {
   let startIdx = 0
   let endIdx = array.length - 1
