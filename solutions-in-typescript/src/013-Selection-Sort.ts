@@ -4,22 +4,21 @@ const selectionSort = (array: number[]) => {
 
   while (startIdx < array.length - 1) {
     let smallestIdx = startIdx
-
     for (let i = startIdx + 1; i < array.length; i++) {
       if (array[i] < array[smallestIdx]) {
         smallestIdx = i
       }
     }
-
-    ;[array[smallestIdx], array[startIdx]] = [
-      array[startIdx],
-      array[smallestIdx]
-    ]
-
+    smallestIdx !== startIdx && swap(smallestIdx, startIdx, array)
     startIdx++
   }
 
   return array
 }
 
+const swap = (i: number, j: number, array: number[]): void => {
+  ;[array[i], array[j]] = [array[j], array[i]]
+}
+
 console.log(selectionSort([8, 5, 2, 9, 5, 6, 3]))
+export {}
