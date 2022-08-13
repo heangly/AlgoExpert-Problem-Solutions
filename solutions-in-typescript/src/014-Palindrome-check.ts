@@ -13,3 +13,4 @@ const isPalindrome = (string: string): boolean => {
 }
 
 console.log(isPalindrome('abcdcba'))
+export {}
