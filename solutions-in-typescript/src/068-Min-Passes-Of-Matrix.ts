@@ -1,57 +1,60 @@
+// Time: O(n * m) | Space: O(n * m)
 const minimumPassesOfMatrix = (matrix: number[][]) => {
-  const dp = new Array(matrix.length)
-    .fill(0)
-    .map((_) => new Array(matrix[0].length).fill(0))
-
-  const negativeStacks: number[][] = []
-
-  let max = -Infinity
+  let passes = 0
+  const q: number[][] = []
 
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
-      if (matrix[i][j] < 0) {
-        negativeStacks.push([i, j])
+      if (matrix[i][j] > 0) {
+        q.push([i, j])
       }
     }
   }
 
-  let seen = new Set()
-  while (negativeStacks.length > 0) {
-    const [i, j] = negativeStacks.shift()!
-    let min = Infinity
-
-    if (i - 1 >= 0 && matrix[i - 1][j] > 0) {
-      min = Math.min(min, dp[i - 1][j])
-      matrix[i][j] = Math.abs(matrix[i][j])
+  const processAdjacentChildren = (i: number, j: number) => {
+    if (i - 1 >= 0 && matrix[i - 1][j] < 0) {
+      q.push([i - 1, j])
+      matrix[i - 1][j] *= -1
     }
 
-    if (i + 1 < matrix.length && matrix[i + 1][j] > 0) {
-      min = Math.min(min, dp[i + 1][j])
-      matrix[i][j] = Math.abs(matrix[i][j])
+    if (j - 1 >= 0 && matrix[i][j - 1] < 0) {
+      q.push([i, j - 1])
+      matrix[i][j - 1] *= -1
     }
 
-    if (j - 1 >= 0 && matrix[i][j - 1] > 0) {
-      min = Math.min(min, dp[i][j - 1])
-      matrix[i][j] = Math.abs(matrix[i][j])
+    if (i + 1 < matrix.length && matrix[i + 1][j] < 0) {
+      q.push([i + 1, j])
+      matrix[i + 1][j] *= -1
     }
 
-    if (j + 1 >= 0 && matrix[i][j + 1] > 0) {
-      min = Math.min(min, dp[i][j + 1])
-      matrix[i][j] = Math.abs(matrix[i][j])
-    }
-
-    if (matrix[i][j] < 0) {
-      const key = `${i}-${j}`
-      if (seen.has(key)) break
-      seen.add(key)
-      negativeStacks.push([i, j])
-    } else {
-      dp[i][j] = min + 1
-      max = Math.max(max, dp[i][j])
+    if (j + 1 < matrix[0].length && matrix[i][j + 1] < 0) {
+      q.push([i, j + 1])
+      matrix[i][j + 1] *= -1
     }
   }
 
-  return negativeStacks.length !== 0 ? -1 : max
+  let idx = 0
+  let passLength = q.length
+
+  while (q.length !== idx) {
+    const [i, j] = q[idx]
+    processAdjacentChildren(i, j)
+
+    if (idx === passLength - 1) {
+      passLength = q.length
+      passes++
+    }
+
+    idx++
+  }
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] < 0) return -1
+    }
+  }
+
+  return passes - 1
 }
 
 console.log(
