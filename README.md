@@ -1,1 +1,1 @@
-These are solutions to coding algorithm challenges.
+These are solutions to coding algorithm challenges .
