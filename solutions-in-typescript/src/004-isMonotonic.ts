@@ -1,5 +1,4 @@
-type Direction = 'increase' | 'decrease' | ''
-
+// Time: O(N) | Space: O(1)
 const isMonotonic = (array: number[]) => {
   let isNonIncrease = true
   let isNonDecrease = true
