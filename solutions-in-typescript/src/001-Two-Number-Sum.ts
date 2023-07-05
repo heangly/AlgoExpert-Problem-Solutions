@@ -1,3 +1,4 @@
+// Time: O(N(log(N))) | Space: O(1)
 export function twoNumberSum(array: number[], targetSum: number) {
   array.sort((a, b) => a - b)
   let left = 0
