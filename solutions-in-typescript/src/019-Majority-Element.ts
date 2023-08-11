@@ -1,16 +1,21 @@
+// Time: O(N) | Space: O(1)
 export function majorityElement(array: number[]) {
-  const max = { maxNum: 0, count: 0 }
-  const table: Record<number, number> = {}
+  let output = array[0]
+  let count = 1
 
-  for (const num of array) {
-    table[num] = (table[num] || 0) + 1
-    if (max.count < table[num]) {
-      max.maxNum = num
-      max.count = table[num]
+  for (let i = 1; i < array.length; i++) {
+    if (count === 0) {
+      output = array[i]
+    }
+
+    if (array[i] === output) {
+      count++
+    } else {
+      count--
     }
   }
 
-  return max.maxNum
+  return output
 }
 
 console.log(majorityElement([1, 2, 3, 2, 2, 1, 2]))
