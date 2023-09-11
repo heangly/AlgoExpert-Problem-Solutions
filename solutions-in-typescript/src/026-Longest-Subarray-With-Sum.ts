@@ -14,13 +14,11 @@ export function longestSubarrayWithSum(array: number[], targetSum: number) {
       startIndex++
     }
 
-    if (accumulation === targetSum) {
-      const currentLength = endIndex - startIndex + 1
-      if (currentLength > maxLength) {
-        maxLength = currentLength
-        output[0] = startIndex
-        output[1] = endIndex
-      }
+    const currentLength = endIndex - startIndex + 1
+    if (accumulation === targetSum && currentLength > maxLength) {
+      maxLength = currentLength
+      output[0] = startIndex
+      output[1] = endIndex
     }
 
     endIndex++
